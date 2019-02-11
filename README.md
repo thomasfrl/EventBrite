@@ -1,24 +1,15 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Pour lancer le projet ecrivez dans votre terminal à la racine du projet:
 
-Things you may want to cover:
+`bundle install`
 
-* Ruby version
+`rails db:create`
 
-* System dependencies
+`rails db:migrate`
 
-* Configuration
+`rails db:seed`
 
-* Database creation
+et c'est bon, vous pouvez vérifier dans yopmail en recherchant 'user'
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Pour envoyer sur letter-opener allez dans confi/environments/development.rb pour enlever les commentaires l'avant-derniere ligne
