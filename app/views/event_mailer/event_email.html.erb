@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Salut <%= @user.name %> et bienvenue à notre evenement !</h1>
+    <p>
+      Tu t'es inscrit sur à l'evenement <%= @event.title %> en utilisant l'e-mail suivant : <%= @user.email %>.
+    </p>
+    <p>
+      Il commence le <%= @event.start_date %> et dure <%= @event.duration %> min.le prix est de <%= @event.price %> €
+    </p>
+    <p>
+      Sa descritption : 
+    </p>
+    <p><%= @event.description %></p>
+    <p> À très vite !
+  </body>
+</html>
+

@@ -1,14 +1,24 @@
 class Event < ApplicationRecord
+  def multiple_of_5?
+    duration % 5 == 0 ? true : errors.add(:duration, "should be a multiple of 5") 
+  end
+
+  def not_in_the_past?
+    errors.add(:start_date, "cannot be in past") unless 
+      start_date.to_i > Time.now.to_i       
+    
+  end
+
   has_many :attendances
   has_many :users, through: :attendances
   belongs_to :administrator, class_name: "User"
 
-  validates :start_date, presence: true, numericality: {greater_than: Time.now}
-  validates :duration, presence: true, numericality: {greater_than: Time.now}
-  validates :title, presence: true, lenght: {in: 5..140}
-  validates :description, presence: true, lenght: {in: 20..1000}
-  validates :price, presence: true, numericality: {greater_than_or_equal_to: 1}, numericality: {less_than_or_equal_to: 1000}
+  
+  validates :duration, if: :multiple_of_5?, presence: true, numericality: {greater_than: 0}
+  validates :start_date, if: :not_in_the_past?, presence: true
+  validates :title, presence: true, length: {in: 5..140}
+  validates :description, presence: true, length: {in: 20..1000}
+  validates :price, presence: true, numericality: {greater_than: 0, less_than: 1001}
   validates :location, presence: true
-
 
 end
