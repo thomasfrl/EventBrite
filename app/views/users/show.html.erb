@@ -1,0 +1,7 @@
+<h1>Votre compte</h1>
+<p><%=@user.first_name  %></p>
+<p><%= @user.last_name%></p>
+<p><%= @user.email %></p>
+<p><%=@user.description  %></p>
+
+<%= link_to "Modifier", edit_user_registration_path(@user) %>
