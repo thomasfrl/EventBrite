@@ -1,39 +1,27 @@
-<p id="notice"><%= notice %></p>
+<div class="card m-2">
+  <div class="card-body">
+    <h5 class="card-title text-center"><%=@event.title%></h5>
+    <p class="card-text text-center"><%= @event.description %></p>
 
-<p>
-  <strong>Start date:</strong>
-  <%= @event.start_date %>
-</p>
+    <hr>
 
-<p>
-  <strong>Duration:</strong>
-  <%= @event.duration %>
-</p>
+    <p class="card-text">
+      <ul>
+        <li>Start date : <%= @event.start_date %></li>
+        <li>Duration : <%= @event.duration %></li>
+        <li>Price : <%= @event.price %></li>
+        <li>Location : <%= @event.location %></li>
+      </ul>
+    </p>
+  </div>
+  <div class="card-footer">Administrator : <%= @event.administrator.name %></div>
+</div>
 
-<p>
-  <strong>Title:</strong>
-  <%= @event.title %>
-</p>
+<div class="d-flex justify-content-around">
+  <%= link_to 'Back', events_path, class: "btn btn-outline-primary"  %>
+  <% if current_user == @event.administrator %>
+    <%= link_to 'Edit', edit_event_path(@event), class: "btn btn-outline-primary" %>
+    <%= link_to 'Dey', @event, d: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-outline-primary" %>
+  <% end %>
+</div>
 
-<p>
-  <strong>Description:</strong>
-  <%= @event.description %>
-</p>
-
-<p>
-  <strong>Price:</strong>
-  <%= @event.price %>
-</p>
-
-<p>
-  <strong>Location:</strong>
-  <%= @event.location %>
-</p>
-
-<p>
-  <strong>Administrator:</strong>
-  <%= @event.administrator.name %>
-</p>
-
-<%= link_to 'Edit', edit_event_path(@event) %> |
-<%= link_to 'Back', events_path %>

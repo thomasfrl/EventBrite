@@ -1,4 +1,7 @@
 <%flash.each do |name,msg|%>
+    <% name = "success" if name == "notice" %>
+    <% name = "danger" if name == "alert" %>
+
     <div class="alert alert-<%=name%> alert-dismissible fade show" role="alert">
         <h4>Alerte</h4>
         <p><%= raw(msg)%></p>

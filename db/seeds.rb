@@ -8,12 +8,12 @@
 
 Attendance.destroy_all
 Event.destroy_all
-#User.destroy_all
+User.destroy_all
 
-# 5.times do |i|
-#   User.create!(first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, email: "user#{i}@yopmail.com")
-# end
-# puts "Users created"
+5.times do |i|
+   User.create!(first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, email: "user#{i}@yopmail.com", password: "motdepasse", description: "que du blabla")
+ end
+puts "Users created"
 
 
 3.times do

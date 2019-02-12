@@ -1,6 +1,6 @@
 <%= form_with(model: event, local: true) do |form| %>
   <% if event.errors.any? %>
-    <div id="error_explanation">
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
       <h2><%= pluralize(event.errors.count, "error") %> prohibited this event from being saved:</h2>
 
       <ul>
@@ -8,7 +8,11 @@
         <li><%= message %></li>
       <% end %>
       </ul>
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
     </div>
+
   <% end %>
 
   <div class="field">
@@ -33,7 +37,7 @@
 
   <div class="field">
     <%= form.label :price %>
-    <%= form.number_field :price %>
+    <%= form.number_field :price, within: 1...1000 %>
   </div>
 
   <div class="field">

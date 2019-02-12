@@ -5,12 +5,18 @@
 
   <div class="field">
     <%= f.label :first_name %><br />
-    <%= f.text_field :first_name, autocomplete: "first name" %>
+    <%= f.text_field :first_name, autocomplete: "first_name" %>
   </div>
   <div class="field">
     <%= f.label :last_name %><br />
-    <%= f.text_field :last_name, autocomplete: "last name" %>
+    <%= f.text_field :last_name, autocomplete: "last_name" %>
   </div>
+
+  <div class="field">
+    <%= f.label :description %><br />
+    <%= f.text_area :description, autocomplete: "description" %>
+  </div>
+
 
   <div class="field">
     <%= f.label :email %><br />
