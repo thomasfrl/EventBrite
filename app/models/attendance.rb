@@ -4,8 +4,8 @@ class Attendance < ApplicationRecord
 
   validates :stripe_customer_id, presence: true
 
- # after_create :event_send
- # after_create :admin_send
+  after_create :event_send
+  after_create :admin_send
 
   def event_send
     EventMailer.event_email(self).deliver_now

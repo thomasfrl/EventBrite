@@ -5,14 +5,14 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   
   
-  has_many :attendances
+  has_many :attendances, dependent: :destroy
   has_many :administrated_events, class_name: "Event", foreign_key: "administrator_id", dependent: :destroy
   has_many :events, through: :attendances
   
   validates :first_name, presence: true
   validates :last_name, presence: true
 
-  #after_create :welcome_send
+  after_create :welcome_send
 
   def welcome_send
     UserMailer.welcome_email(self).deliver_now
