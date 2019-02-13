@@ -94,4 +94,7 @@ Rails.application.configure do
 
   #config devise mailer in production 
   config.action_mailer.default_url_options = { :host => 'event-brite-thomas.herokuapp.com' }
+  config.action_mailer.perform_deliveries = true
+
 end
+
