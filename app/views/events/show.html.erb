@@ -1,17 +1,30 @@
 <div class="card m-2">
-  <div class="card-body">
-    <h5 class="card-title text-center"><%=@event.title%></h5>
+  <div class="card-body m-0 p-0">
+    <h5 class="card-title text-center p-2"><%=@event.title%></h5>
+    <hr> 
     <p class="card-text text-center"><%= @event.description %></p>
-
-    <hr>
-
     <p class="card-text">
-      <ul>
-        <li>Start date : <%= @event.start_date %></li>
-        <li>Duration : <%= @event.duration %></li>
-        <li>Price : <%= @event.price %></li>
-        <li>Location : <%= @event.location %></li>
-      </ul>
+      <table class="table table-bordered">
+        <tbody>
+          <tr>
+            <th scope="row">Durée</th>
+            <td><%= @event.duration %> min</td>
+          </tr>
+          <tr>
+            <th scope="row">Date</th>
+            <td><%= @event.start_date %></td>
+          </tr>
+          <tr>
+            <th scope="row">Prix</th>
+            <td>  <%= @event.price %> €</td>
+          </tr>
+          <tr>
+            <th scope="row">Lieu</th>
+            <td> <%= @event.location %></td>
+          </tr>
+
+        </tbody>
+      </table>
     </p>
   </div>
   <div class="card-footer">Administrator : <%= @event.administrator.name %></div>

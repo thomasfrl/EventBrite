@@ -1,37 +1,30 @@
-<p id="notice"><%= notice %></p>
-
+<br>
 <h1 class="text-center">Events</h1>
-
-
-    
-    
-    
+<br>    
 <div class="d-flex flex-wrap justify-content-center">
   <% @events.each do |event| %>
-    <div class="card m-2" style="width: 30rem;">
-      <div class="card-body">
+
+    <% if administrator?(event) %>
+      <% color = 'primary' %>
+      <% footer = 'Vous administrez cet événement' %>
+    <% elsif participant?(event) %>
+      <% color = 'success' %>
+      <% footer = 'Vous participez à cet événement' %>
+    <% else %>
+      <% color = 'dark' %>
+      <% footer = 'Découvrez cet événement' %>
+    <% end %>
+
+    <div class="card m-2 border-<%=color%>" style="width: 30rem;">
+      <div class="card-body text-<%=color%>">
         <h5 class="card-title text-center"><%=event.title%></h5>
         <p class="card-text text-center"><%= event.description %></p>
 
         <div class="d-flex justify-content-around">
-          <%= link_to 'Show', event, class: "btn btn-outline-primary" %>
-          <% if current_user == event.administrator %>
-            <%= link_to 'Edit', edit_event_path(event), class: "btn btn-outline-primary" %>
-            <%= link_to 'Dey', event, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-outline-primary" %>
-          <% end %>
+          <%= link_to 'Show', event, class: "btn btn-#{color}" %>
         </div>
-        <hr>
-
-        <p class="card-text">
-          <ul>
-            <li>Start date : <%= event.start_date %></li>
-            <li>Duration : <%= event.duration %></li>
-            <li>Price : <%= event.price %></li>
-            <li>Location : <%= event.location %></li>
-          </ul>
-        </p>
       </div>
-      <div class="card-footer">Administrator : <%= event.administrator.name %></div>
+      <div class="card-footer text-center"><%= footer %></div>
     </div>
 
     <% end %>
