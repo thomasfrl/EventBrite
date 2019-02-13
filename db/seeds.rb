@@ -25,8 +25,8 @@ puts "Events created"
 Event.all.each do |event|
   i = rand(1..9)
   i.times do
-    user = User.all.reject{|u| event.administrator == u}.reject{|u| event.users.include?(u)}.sample
-    Attendance.create!(user_id: user.id, event_id: Event.all.sample.id, stripe_customer_id: Faker::Code.ean)
+    users = User.all.reject{|u| event.administrator == u}.reject{|u| event.users.include?(u)}
+    Attendance.create!(user_id: users.sample.id, event_id: Event.all.sample.id, stripe_customer_id: Faker::Code.ean)
   end
 end
 puts "Attendances created"
