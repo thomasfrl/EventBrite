@@ -20,7 +20,7 @@ class ChargesController < ApplicationController
       :currency    => 'usd'
     )
   
-    redirect_to :new
+    redirect_to: @new
 
     rescue Stripe::CardError => e
       flash[:error] = e.message
