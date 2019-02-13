@@ -1,7 +1,75 @@
-<h1>Votre compte</h1>
-<p><%=@user.first_name  %></p>
-<p><%= @user.last_name%></p>
-<p><%= @user.email %></p>
-<p><%=@user.description  %></p>
-
+<br>
+<h1 class="text-center">Votre compte</h1>
+<br>
+<p>Votre prénom : <%=@user.first_name  %></p>
+<p>Votre nom de famille : <%= @user.last_name%></p>
+<p>Votre email : <%= @user.email %></p>
+<p>Votre description : <%=@user.description  %></p>
+<br>
 <%= link_to "Modifier", edit_user_registration_path(@user), class: "btn btn-primary" %>
+
+<h3>Liste de tous les événements que vous administrez : </h3>
+<table class="table table-bordered">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">Start date</th>
+      <th scope="col">Duration</th>
+      <th scope="col">Title</th>
+      <th scope="col">Description</th>
+      <th scope="col">Price</th>
+      <th scope="col">Location</th>
+      <th scope="col" colspan="1"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @administrated_events.each do |event| %>
+      <tr>
+        <td><%= event.start_date %></td>
+        <td><%= event.duration %></td>
+        <td><%= event.title %></td>
+        <td><%= event.description %></td>
+        <td><%= event.price %></td>
+        <td><%= event.location %></td>
+        <td><%= link_to 'Show', event %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+<h3>Liste de tous les événements auxquels vous participez : </h3>
+
+<table class="table table-bordered">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">Start date</th>
+      <th scope="col">Duration</th>
+      <th scope="col">Title</th>
+      <th scope="col">Description</th>
+      <th scope="col">Price</th>
+      <th scope="col">Location</th>
+      <th scope="col">Administrator</th>
+      <th scope="col" colspan="1"></th>
+
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @events.each do |event| %>
+      <tr>
+        <td><%= event.start_date %></td>
+        <td><%= event.duration %></td>
+        <td><%= event.title %></td>
+        <td><%= event.description %></td>
+        <td><%= event.price %></td>
+        <td><%= event.location %></td>
+        <td><%= event.administrator.name %></td>
+        <td><%= link_to 'Show', event %></td>
+
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>

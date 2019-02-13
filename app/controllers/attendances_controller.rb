@@ -1,4 +1,10 @@
 class AttendancesController < ApplicationController
+  before_action :authenticate_user!
+  before_action :valid_administrator, only: [:index]
+  before_action :non_valid_administrator, only: [:new, :create]
+  before_action :already_subscribe, only: [:new, :create]
+
+  
   def new
     @event = Event.find(params[:event_id])
   end
@@ -30,6 +36,7 @@ class AttendancesController < ApplicationController
     if @attendance.save
       redirect_to event_path(@event), notice: 'Subscription was successfully created.' 
     else
+      flash.now[:error] = "Echec lors de votre inscription à l'événement"
       render :new
     end
 
