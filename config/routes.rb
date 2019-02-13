@@ -1,12 +1,13 @@
 Rails.application.routes.draw do
 
-  get 'users/show'
   root to: 'events#index'
-  get 'home/index'
-  get 'home/secret'
+  # get 'home/index'
+  # get 'home/secret'
   devise_for :users
-  resources :events
-  resources :users
+  resources :events do
+    resources :attendances, only: [:new, :create, :index]
+  end
+  resources :users, only: [:show]
   resources :charges
 
 

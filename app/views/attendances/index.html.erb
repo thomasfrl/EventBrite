@@ -1,0 +1,31 @@
+<h1 class="text-center">Listes des participants à votre événement :  <br><%= @event.title %></h1>
+<br>
+<table class="table table-bordered">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">Nom</th>
+      <th scope="col">Prénom</th>
+      <th scope="col">Email</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @attendances.each do |attendance| %>
+        <%user = attendance.user %>
+      <tr>
+        <td><%= user.last_name %></td>
+        <td><%= user.first_name %></td>
+        <td><%= user.email %></td>
+      </tr>
+     <% end %>
+  </tbody>
+</table>
+
+<div class="d-flex justify-content-around">
+    <%= link_to 'Back', event_path(@event), class: "btn btn-outline-primary"  %>
+    <%= link_to 'Edit', edit_event_path(@event), class: "btn btn-outline-primary" %>
+    <%= link_to 'Destroy', @event, d: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-outline-primary" %>
+</div>
+
+
+<br>

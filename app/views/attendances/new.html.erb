@@ -1,0 +1,33 @@
+<h2>Insription à l'événement <%=@event.title%></h5>
+<p><%= @event.description %></p>
+
+<p>L'événement aura lieu à  <%= @event.start_date.day%> <%=@event.start_date.month%> <%=@event.start_date.year%> à <%=@event.start_date.hour%> h <%=@event.start_date.min%> à <%=@event.location  %></p>
+
+<p>Pour vous inscrire vous devrez payer <%= @event.price %> €</p> 
+<% if false %>
+    <% if current_user == @event.administrator%>
+        <%= link_to 'Edit', edit_event_path(@event), class: "btn btn-outline-primary" %>
+        <%= link_to 'Dey', @event, d: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-outline-primary" %>
+    <% end %>
+<% end %>
+
+<% unless current_user.events.include?(@event) && current_user == @event.administrator%>
+    <%= form_tag event_attendances_path(@event) do %>
+        <article>
+            <% if flash[:error].present? %>
+                <div class="alert alert-alert alert-dismissible fade show" role="alert">
+                    <p><%= flash[:error] %></p>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            <% end %>
+        </article>
+
+        <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+            data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
+            data-description="<%=@event.title%>"
+            data-amount="<%=@event.price*100%>"
+            data-locale="auto"></script>
+    <% end %>
+<% end %>
