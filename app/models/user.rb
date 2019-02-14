@@ -4,7 +4,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   
-  
+  has_one_attached :avatar
   has_many :attendances, dependent: :destroy
   has_many :administrated_events, class_name: "Event", foreign_key: "administrator_id", dependent: :destroy
   has_many :events, through: :attendances

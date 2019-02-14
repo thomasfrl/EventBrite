@@ -1,4 +1,13 @@
 <div class="card m-2">
+  <div class="d-flex flex-column align-items-center">
+    <p></p>
+    <%if @event.event_image.attached?%>
+      <%= image_tag @event.event_image, alt: 'event_image',  class: "card-img-top p-2" %>
+    <%else%>
+      <p>=== Il n'y a pas encore d'event_image lié à cet utilisateur ===</p>
+    <%end%>
+    <p></p>
+  </div>
   <div class="card-body m-0 p-0">
     <h5 class="card-title text-center p-2"><%=@event.title%></h5>
     <hr> 
@@ -35,7 +44,7 @@
   <% if current_user %>
         <% if current_user == @event.administrator %>
       <%= link_to 'Edit', edit_event_path(@event), class: "btn btn-outline-dark" %>
-      <%= link_to 'Destroy', @event, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-outline-dark" %>
+      <%= link_to 'Destroy', event_path(@event), :method => 'delete', data: { confirm: 'Are you sure?' }, class: "btn btn-outline-dark" %>
       <%= link_to 'Liste de vos participants', event_attendances_path(@event), class: "btn btn-outline-dark" %>
     <% elsif !current_user.events.include?(@event)%>
       <%= link_to "S'inscrire", new_event_attendance_path(@event), class: "btn btn-outline-dark" %>

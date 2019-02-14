@@ -44,5 +44,11 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def is_there_image?
+    unless params[:event_image]
+      flash[:danger] = "Vous ne devez ajouter une image"
+      redirect_back(fallback_location: root_path)
+    end
+  end
 
 end

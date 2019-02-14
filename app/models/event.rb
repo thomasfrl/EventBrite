@@ -9,6 +9,7 @@ class Event < ApplicationRecord
     
   end
 
+  has_one_attached :event_image
   has_many :attendances, dependent: :destroy
   has_many :users, through: :attendances
   belongs_to :administrator, class_name: "User"

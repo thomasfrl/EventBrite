@@ -2,6 +2,7 @@ class EventsController < ApplicationController
   before_action :set_event, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!, only: [:new, :create, :destroy, :update, :edit]
   before_action :valid_user, only: [:destroy, :update, :edit]
+  before_action :is_there_image?, only: [:create]
 
   # GET /events
   # GET /events.json
@@ -28,6 +29,7 @@ class EventsController < ApplicationController
   def create
     @event = Event.new(event_params)
     @event.administrator = current_user
+    @event.event_image.attach(params[:event_image])
     respond_to do |format|
       if @event.save
         format.html { redirect_to @event, notice: 'Event was successfully created.' }
@@ -43,6 +45,7 @@ class EventsController < ApplicationController
   # PATCH/PUT /events/1.json
   def update
     respond_to do |format|
+      @event.event_image.attach(params[:event_image]) if params[:event_image]
       if @event.update(event_params)
         format.html { redirect_to @event, notice: 'Event was successfully updated.' }
         format.json { render :show, status: :ok, location: @event }
