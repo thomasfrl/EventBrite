@@ -4,12 +4,6 @@
 <p>L'événement aura lieu à  <%= @event.start_date.day%> <%=@event.start_date.month%> <%=@event.start_date.year%> à <%=@event.start_date.hour%> h <%=@event.start_date.min%> à <%=@event.location  %></p>
 
 <p>Pour vous inscrire vous devrez payer <%= @event.price %> €</p> 
-<% if false %>
-    <% if current_user == @event.administrator%>
-        <%= link_to 'Edit', edit_event_path(@event), class: "btn btn-outline-primary" %>
-        <%= link_to 'Dey', @event, d: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-outline-primary" %>
-    <% end %>
-<% end %>
 
 <% unless current_user.events.include?(@event) && current_user == @event.administrator%>
     <%= form_tag event_attendances_path(@event) do %>
