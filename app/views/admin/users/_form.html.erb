@@ -1,0 +1,78 @@
+<%= form_with( model: admin_user, url: @path, local: true, multipart: true) do |form| %>
+  <% if admin_user.errors.any? %>
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+      <h2><%= pluralize(admin_user.errors.count, "error") %> prohibited this admin_user from being saved:</h2>
+      <ul>
+      <% admin_user.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+
+  <% end %>
+
+  <div class="field">
+    <%= form.label :first_name %>
+    <%= form.text_field :first_name, class: 'form-control' %>
+  </div>
+
+  <div class="field">
+    <%= form.label :last_name %>
+    <%= form.text_field :last_name,  class: 'form-control' %>
+  </div>
+
+  <div class="field">
+    <%= form.label :email %>
+    <%= form.text_field :email, class: 'form-control' %>
+  </div>
+
+  <div class="field">
+    <%= form.label :password %>
+    <% if @minimum_password_length %>
+    <em>(<%= @minimum_password_length %> characters minimum)</em>
+    <% end %><br />
+    <%= form.password_field :password, autocomplete: "new-password", class: 'form-control' %>
+  </div>
+
+  <div class="field">
+    <%= form.label :password_confirmation %><br />
+    <%= form.password_field :password_confirmation, autocomplete: "new-password", class: 'form-control' %>
+  </div>
+
+  <div class="field">
+    <%= form.label :description %>
+    <%= form.text_area :description, class: 'form-control' %>
+  </div>
+
+  <div class="field">
+      <label for="is_admin">Cet utlisateur est-il un administrateur? </label><br>
+      <%= form.check_box :is_admin,{}, true, false %> <br />
+  </div>
+
+
+  <div class="field">    
+    <%= form.label :avatar %> <br>
+    <%= form.file_field :avatar%>
+  </div>
+  <br>
+  <div class="actions d-flex justify-content-center">
+    <%= form.submit 'Soummettre', class: 'btn btn-outline-dark'%>
+  </div>
+<% end %>
+
+
+
+
+
+
+
+
+<% if false %>
+  <div class="field">
+    <%= form.label :administrator %>
+    <%= form.collection_select :user_id, User.order(:first_name),:id,:first_name, include_blank: true %>
+  </div>
+<% end %>

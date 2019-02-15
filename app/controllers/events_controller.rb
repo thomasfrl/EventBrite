@@ -3,17 +3,17 @@ class EventsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :destroy, :update, :edit]
   before_action :valid_user, only: [:destroy, :update, :edit]
   before_action :is_there_image?, only: [:create]
-
+  before_action :is_validated?, only: [:show]
   # GET /events
   # GET /events.json
   def index
-    @events = Event.all
+    @events = Event.all.select{|e| e.validated == true}
   end
 
   # GET /events/1
   # GET /events/1.json
   def show
-  end
+  end 
 
   # GET /events/new
   def new

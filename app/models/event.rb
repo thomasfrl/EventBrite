@@ -6,7 +6,10 @@ class Event < ApplicationRecord
   def not_in_the_past?
     errors.add(:start_date, "cannot be in past") unless 
       start_date.to_i > Time.now.to_i       
-    
+  end
+
+  def state
+    self.validated == true ? "Validé" : "En attente de vaildation"
   end
 
   has_one_attached :event_image

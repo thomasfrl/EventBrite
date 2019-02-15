@@ -1,0 +1,33 @@
+<h1>Admin Users</h1>
+
+<table class="table table-bordered">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">Nom</th>
+      <th scope="col">Prénom</th>
+      <th scope="col">Email</th>
+      <th scope="col">Description</th>
+      <th scope="col">Admin</th>
+      <th scope="col" colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @admin_users.each do |admin_user| %>
+      <tr>
+        <td> <%= admin_user.first_name  %> </td>
+        <td><%= admin_user.last_name  %></td>
+        <td><%= admin_user.email  %></td>
+        <td><%= admin_user.description  %></td>
+        <td><%= admin_user.is_admin  %></td>
+        <td><%= link_to 'Show', admin_user_path(admin_user) %></td>
+        <td><%= link_to 'Edit', edit_admin_user_path(admin_user) %></td>
+        <td><%= link_to 'Destroy', admin_user_path(admin_user), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Admin User', new_admin_user_path, class: 'btn btn-outline-dark' %>

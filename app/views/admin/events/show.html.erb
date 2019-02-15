@@ -39,16 +39,40 @@
   <div class="card-footer">Administrator : <%= @event.administrator.name %></div>
 </div>
 
+
+<h3>Liste de tous les participants : </h3>
+<br>
+<table class="table table-bordered">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">Prénom</th>
+      <th scope="col">Nom</th>
+      <th scope="col">email</th>
+      <th scope="col">Description</th>
+      <th scope="col">Admin</th>
+      <th scope="col" colspan="1"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @participants.each do |participant| %>
+      <tr>
+        <td><%= participant.first_name %></td>
+        <td><%= participant.last_name %></td>
+        <td><%= participant.email %></td>
+        <td><%= participant.description %></td>
+        <td><%= participant.is_admin %></td>
+        <td><%= link_to 'Show', admin_user_path(participant) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<br>
+
+
 <div class="d-flex justify-content-around">
-  <%= link_to 'Back', events_path, class: "btn btn-outline-dark"  %>
-  <% if current_user %>
-        <% if current_user == @event.administrator %>
-      <%= link_to 'Edit', edit_event_path(@event), class: "btn btn-outline-dark" %>
-      <%= link_to 'Destroy', event_path(@event), :method => 'delete', data: { confirm: 'Are you sure?' }, class: "btn btn-outline-dark" %>
-      <%= link_to 'Liste de vos participants', event_attendances_path(@event), class: "btn btn-outline-dark" %>
-    <% elsif !current_user.events.include?(@event)%>
-      <%= link_to "S'inscrire", new_event_attendance_path(@event), class: "btn btn-outline-dark" %>
-    <% end %>   
-  <% end %>    
+  <%= link_to 'Back', admin_events_path, class: "btn btn-outline-dark"  %>
+  <%= link_to 'Edit', edit_admin_event_path(@event), class: "btn btn-outline-dark" %>
+  <%= link_to 'Destroy', admin_event_path(@event), :method => 'delete', data: { confirm: 'Are you sure?' }, class: "btn btn-outline-dark" %>
 </div>
 

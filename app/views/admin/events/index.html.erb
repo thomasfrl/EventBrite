@@ -1,0 +1,41 @@
+<h1>Admin Events</h1>
+
+<table class="table table-bordered">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">Titre</th>
+      <th scope="col">Description</th>
+      <th scope="col">Lieu</th>
+      <th scope="col">Date</th>
+      <th scope="col">Durée</th>
+      <th scope="col">Prix</th>
+      <th scope="col">Nb participants</th>
+      <th scope="col">Administrateur</th>
+      <th scope="col">Etat</th>
+      <th scope="col" colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @events.each do |event| %>
+      <tr>
+        <td> <%= event.title  %> </td>
+        <td><%= event.description  %></td>
+        <td><%= event.location  %></td>
+        <td><%= event.start_date  %></td>
+        <td><%= event.duration  %></td>
+        <td><%= event.price  %></td>
+        <td><%= event.users.size  %></td>
+        <td><%= event.administrator.name %></td>
+        <td><%= event.state %></td>
+        <td><%= link_to 'Show', admin_event_path(event) %></td>
+        <td><%= link_to 'Edit', edit_admin_event_path(event) %></td>
+        <td><%= link_to 'Destroy', admin_event_path(event), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'Nouvel événement', new_admin_event_path, class: 'btn btn-outline-dark' %>

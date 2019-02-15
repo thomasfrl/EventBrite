@@ -17,7 +17,7 @@ puts "Users created"
 
 
 15.times do
-  Event.create!(duration: rand(1..200)*5, start_date: Time.now + rand(3600..360000), title: Faker::Book.title, description: "Encore un evenement qui casse des culs par rangées de 12", price: rand(1..1000), location: Faker::Nation.capital_city, administrator_id: User.all.sample.id)
+  Event.create!(duration: rand(1..200)*5, start_date: Time.now + rand(3600..360000), title: Faker::Book.title, description: "Encore un evenement qui casse des culs par rangées de 12", price: rand(1..1000), location: Faker::Nation.capital_city, administrator_id: User.all.sample.id, validated: true)
 end
 puts "Events created"
 

@@ -3,6 +3,7 @@ class AttendancesController < ApplicationController
   before_action :valid_administrator, only: [:index]
   before_action :non_valid_administrator, only: [:new, :create]
   before_action :already_subscribe, only: [:new, :create]
+  before_action :event_is_validated?, only: [:new, :create]
 
   
   def new

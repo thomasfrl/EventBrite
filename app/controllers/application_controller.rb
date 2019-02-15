@@ -2,6 +2,29 @@ class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller? 
   
   protected
+
+  def is_validated?
+    unless Event.find(params[:id]).validated 
+      flash[:danger] = "Vous ne pouvez pas afficher un événement non validé"
+      redirect_back(fallback_location: root_path)    
+    end
+  end
+
+  def event_is_validated?
+    unless Event.find(params[:event_id]).validated 
+      flash[:danger] = "Vous ne pouvez pas vous inscrire à un événement non validé"
+      redirect_back(fallback_location: root_path)    
+    end
+  end
+
+
+  def is_admin?
+    unless current_user.is_admin == true
+      flash[:danger] = "Vous n'êtes pas administrateur"
+      redirect_back(fallback_location: root_path)
+    end
+  end
+
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up, keys: [:first_name, :last_name, :description])
     devise_parameter_sanitizer.permit(:account_update, keys: [:first_name, :last_name, :description])
