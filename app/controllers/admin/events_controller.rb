@@ -31,12 +31,13 @@ class Admin::EventsController < ApplicationController
   def create
     @event = Event.new(admin_event_params)
     @event.event_image.attach(params[:event_image])
-    @event.update(validated: params[:event][:validated])
+    @event.validated = params[:event][:validated]
     respond_to do |format|
       if @event.save
         format.html { redirect_to admin_events_path, notice: 'Event was successfully created.' }
        # format.json { render :show, status: :created, location: @event }
       else
+        @path = "/admin/events/"
         format.html { render :new }
         #format.json { render json: @event.errors, status: :unprocessable_entity }
       end
@@ -51,11 +52,12 @@ class Admin::EventsController < ApplicationController
       puts params
       puts "m"*60
       @event.event_image.attach(params[:event_image]) if params[:event_image]
-      @event.update(validated: params[:event][:validated])
+      @event.validated = params[:event][:validated]
       if @event.update(admin_event_params)
         format.html { redirect_to admin_events_path, notice: 'Event was successfully updated.' }
         #format.json { render :show, status: :ok, location: @event }
       else
+        @path = "/admin/events/#{params[:id]}"
         format.html { render :edit }
         #format.json { render json: @event.errors, status: :unprocessable_entity }
       end

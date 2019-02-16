@@ -41,6 +41,7 @@ class Admin::UsersController < ApplicationController
         format.html { redirect_to admin_users_path, notice: 'User was successfully created.' }
         #format.json { render :show, status: :created, location: @admin_user }
       else
+        @path = "/admin/users/"
         format.html { render :new }
         #format.json { render json: @admin_user.errors, status: :unprocessable_entity }
       end
@@ -51,13 +52,23 @@ class Admin::UsersController < ApplicationController
   # PATCH/PUT /admin/users/1.json
   def update
     respond_to do |format|
-      if @admin_user.update(admin_user_params)
-        @admin_user.update(is_admin: params[:user][:is_admin])
+      @admin_user.is_admin = params[:user][:is_admin]
+      puts "t"*90
+      puts params
+      puts "t"*90
+      if params[:user][:password]
+        puts "9"*60
+      end
+      if params[:user][:password] != "" || params[:user][:password_confirmation] != ""
+        @admin_user.password = params[:user][:password]
+        @admin_user.password_confirmation = params[:user][:password_confirmation]
+      end 
+      if @admin_user.update(admin_user_params) 
         @admin_user.avatar.attach(params[:user][:avatar]) if params[:user][:avatar]
-        @admin_user.update(password: params[:user][:password], password_confirmation: params[:user][:password_confirmation]) if params[:user][:password] && params[:user][:password_confirmation]
         format.html { redirect_to admin_users_path, notice: 'User was successfully updated.' }
         #format.json { render :show, status: :ok, location: @admin_user }
       else
+        @path = "/admin/users/#{params[:id]}"
         format.html { render :edit }
         #format.json { render json: @admin_user.errors, status: :unprocessable_entity }
       end
