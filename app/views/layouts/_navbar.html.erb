@@ -1,32 +1,36 @@
-<header class="row navbar navbar-expand navbar-dark bg-dark text_light ">
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto my-sm-0">
-            <%= link_to 'Accueil', root_path, :class => "nav-link" %>
-            <%= link_to 'Nouvel événement', new_event_path, :class => "nav-link" %>   
-            <% if current_user %>
-                <% if current_user.is_admin %>
-                    <%= link_to 'Gestion des événements', admin_events_path, :class => "nav-link" %>
-                    <%= link_to 'Gestion des utilisateurs', admin_users_path, :class => "nav-link" %>
-                <% end %>
-            <% end %>
-        </ul>
-        <div class="dropdown">
-            <% if user_signed_in? %>
-                <button class="btn btn-secondary active dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Votre compte</button>
-                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="Users">
-                    <%= link_to 'Mon profil', current_user, :class => "dropdown-item" %>
-                    <%= link_to "Sign out", destroy_user_session_path, method: :delete, :class => "dropdown-item" %>
-                </div>
-            <% else %>
-                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                S'inscrire/Se connecter</button>
-                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="Users">
-                    <%= link_to "Sign in", new_user_session_path, :class => "dropdown-item" %>
-                    <%= link_to "Sign up", new_user_registration_path, :class => "dropdown-item" %>
-                </div>
-            <% end %>             
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <%= link_to 'Event Brite', root_path, :class => "navbar-brand" %>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarText">
+        <% if user_signed_in? %>
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <%= link_to 'Mon compte', current_user, :class => "nav-link" %>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Mes événements</a>
+                </li>
+            </ul>
+        <% else %>
+            <span class="navbar-text mr-auto">Vous n'êtes pas connecté</span>
+        <% end %>
+        <div class="navbar-nav">
+            <ul class="navbar-nav">
+                <% if user_signed_in? %>
+                    <li class="nav-item active">
+                        <%= link_to "Sign out", destroy_user_session_path , method: :delete, class: "nav-link" %>
+                    </li>
+                <% else %>
+                        <li class="nav-item active">
+                            <%= link_to "Sign in", new_user_session_path, class: "nav-link" %>
+                        </li>
+                        <li class="nav-item active">
+                            <%= link_to "Sign up", new_user_registration_path, class: "nav-link" %>
+                        </li>
+                <% end %>  
+            </ul>
         </div>
     </div>
-</header>
-
+</nav>

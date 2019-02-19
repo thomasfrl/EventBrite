@@ -1,43 +1,48 @@
-<div class="card m-2">
-  <div class="d-flex flex-column align-items-center">
-    <p></p>
-    <%if @event.event_image.attached?%>
-      <%= image_tag @event.event_image, alt: 'event_image',  class: "card-img-top p-2" %>
-    <%else%>
-      <p>=== Il n'y a pas encore d'event_image lié à cet événement ===</p>
-    <%end%>
-    <p></p>
-  </div>
-  <div class="card-body m-0 p-0">
-    <h5 class="card-title text-center p-2"><%=@event.title%></h5>
-    <hr> 
-    <p class="card-text text-center"><%= @event.description %></p>
-    <p class="card-text">
-      <table class="table table-bordered">
-        <tbody>
-          <tr>
-            <th scope="row">Durée</th>
-            <td><%= @event.duration %> min</td>
-          </tr>
-          <tr>
-            <th scope="row">Date</th>
-            <td><%= @event.start_date %></td>
-          </tr>
-          <tr>
-            <th scope="row">Prix</th>
-            <td>  <%= @event.price %> €</td>
-          </tr>
-          <tr>
-            <th scope="row">Lieu</th>
-            <td> <%= @event.location %></td>
-          </tr>
+<div class="container">
+    <header class="d-flex">
+        <%if @event.event_image.attached?%>
+          <%= image_tag(@event.event_image, :alt => "event image", class: "col-8") %> 
+        <%else%>
+          <p>=== Il n'y a pas encore d'event_image lié à cet événement ===</p>
+        <%end%>      
+        <div class="dol-4 d-flex flex-column">
+            <p><%= "#{@event.start_date.day} #{month(@event.start_date.month)}" %></p><br>
+            <h3><%= @event.title %></h3>
+            <small class="text-muted mb-auto">Par <%= @event.administrator.name %></small>
+            <h4 class="mb-5"><%= @event.price %> €</h4>  
+        </div>
+    </header>
+    <hr class='mt-0'>
+    <aside class="d-flex my-0 py-0">
+      <i class="far fa-heart fa-3x col-8 mr-auto"></i>
+      <%= link_to "S'inscrire", new_event_attendance_path(@event), class: "btn btn-primary btn-lg btn-block col-4" %>
+    </aside>
+    <hr>
 
-        </tbody>
-      </table>
-    </p>
-  </div>
-  <div class="card-footer">Administrator : <%= @event.administrator.name %></div>
+    <article class="d-flex">
+      <div class="col-8">
+        <h3>A propos de l'événement</h3>
+        <p><%= @event.description %></p>
+      </div>
+      <div class='col-4'>
+        <h4>Date et heure</h4>
+        <p>
+          <%= "#{day(@event.start_date)} #{@event.start_date.day} #{month(@event.start_date.month)} #{@event.start_date.year}" %>
+        </p>
+        <p>
+          <%= "#{@event.start_date.hour}h #{@event.start_date.min}" %>
+        </p>
+        <p>
+          <%= @event.duration %> min
+        </p>
+        <br>
+        <h4>Adresse</h4>
+        <p><%= @event.location %></p>
+      </div>
+    </article>
 </div>
+
+<hr>
 
 <div class="d-flex justify-content-around">
   <%= link_to 'Back', events_path, class: "btn btn-outline-dark"  %>

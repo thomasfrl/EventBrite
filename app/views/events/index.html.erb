@@ -1,33 +1,12 @@
+<%= render 'events/carousel' %>
 <br>
-<h1 class="text-center">Events</h1>
-<br>    
-<div class="d-flex flex-wrap justify-content-center">
-  <% @events.each do |event| %>
+<div class="container">
+  <h1 class="text-center">Events</h1>
+  <br>    
+  <div class="d-flex flex-wrap justify-content-center">
+    <% @events.each do |event| %>
+        <%= render 'events/event', event: event %>
+      <% end %>
 
-    <% if administrator?(event) %>
-      <% color = 'primary' %>
-      <% footer = 'Vous administrez cet événement' %>
-    <% elsif participant?(event) %>
-      <% color = 'success' %>
-      <% footer = 'Vous participez à cet événement' %>
-    <% else %>
-      <% color = 'dark' %>
-      <% footer = 'Découvrez cet événement' %>
-    <% end %>
-
-    <div class="card m-2 border-<%=color%>" style="width: 30rem;">
-      <div class="card-body text-<%=color%>">
-        <h5 class="card-title text-center"><%=event.title%></h5>
-        <p class="card-text text-center"><%= event.description %></p>
-
-        <div class="d-flex justify-content-around">
-          <%= link_to 'Show', event, class: "btn btn-#{color}" %>
-        </div>
-      </div>
-      <div class="card-footer text-center"><%= footer %></div>
-    </div>
-
-    <% end %>
-
+  </div>
 </div>
-
