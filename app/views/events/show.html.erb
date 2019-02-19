@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container my-5">
     <header class="d-flex">
         <%if @event.event_image.attached?%>
           <%= image_tag(@event.event_image, :alt => "event image", class: "col-8") %> 
@@ -40,20 +40,28 @@
         <p><%= @event.location %></p>
       </div>
     </article>
+
+    <hr>
+    <h2>Voici les participants : </h2>
+    <% @users.each do |user| %>
+      <%= render "events/participant", user: user %>
+    <% end %>
+
+    <hr>
+
+    <div class="d-flex justify-content-around">
+      <%= link_to 'Back', events_path, class: "btn btn-outline-dark"  %>
+      <% if current_user %>
+            <% if current_user == @event.administrator %>
+          <%= link_to 'Edit', edit_event_path(@event), class: "btn btn-outline-dark" %>
+          <%= link_to 'Destroy', event_path(@event), :method => 'delete', data: { confirm: 'Are you sure?' }, class: "btn btn-outline-dark" %>
+          <%= link_to 'Liste de vos participants', event_attendances_path(@event), class: "btn btn-outline-dark" %>
+        <% elsif !current_user.events.include?(@event)%>
+          <%= link_to "S'inscrire", new_event_attendance_path(@event), class: "btn btn-outline-dark" %>
+        <% end %>   
+      <% end %>    
+    </div>
+
 </div>
 
-<hr>
-
-<div class="d-flex justify-content-around">
-  <%= link_to 'Back', events_path, class: "btn btn-outline-dark"  %>
-  <% if current_user %>
-        <% if current_user == @event.administrator %>
-      <%= link_to 'Edit', edit_event_path(@event), class: "btn btn-outline-dark" %>
-      <%= link_to 'Destroy', event_path(@event), :method => 'delete', data: { confirm: 'Are you sure?' }, class: "btn btn-outline-dark" %>
-      <%= link_to 'Liste de vos participants', event_attendances_path(@event), class: "btn btn-outline-dark" %>
-    <% elsif !current_user.events.include?(@event)%>
-      <%= link_to "S'inscrire", new_event_attendance_path(@event), class: "btn btn-outline-dark" %>
-    <% end %>   
-  <% end %>    
-</div>
 

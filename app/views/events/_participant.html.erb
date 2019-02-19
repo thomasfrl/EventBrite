@@ -1,0 +1,20 @@
+<div class="list-group">
+    <div class="list-group-item list-group-item-action flex-column align-items-start active">
+        <div class="d-flex w-100 justify-content-between">
+            <%if user.avatar.attached?%>
+                <%= image_tag user.avatar, alt: "toi", class: "user-pic "  %>
+            <%else%>
+                <%= image_tag "monkey-653705_960_720.jpg", alt: "toi", class: "user-pic" %>
+            <%end%> 
+
+            <h5 class="mb-1"><%= user.name %></h5>
+            <small><%= user.email %></small>
+        </div>
+        <p class="mb-1"><%= user.description %></p>
+        <small>Donec id elit non mi porta.</small>
+    </div>
+</div>
+
+<p></p>
+<p></p>
+<p></p>

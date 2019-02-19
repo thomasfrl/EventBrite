@@ -26,15 +26,32 @@
  * Copyright 2011-2019 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
-
- #carouselExampleIndicators {
-  position: absolute;
-   z-index:0;
-}#conteneur2 {
-  position: relative;
-  z-index:1;
-     height: 600px;}
-
+ .image {
+  width: 20em;
+  height: 12.5em;
+}
+.user-pic {
+   max-width: 5em;
+   max-height: 3em;
+   overflow:hidden;
+   -webkit-border-radius:50px;
+   -moz-border-radius:50px;
+   border-radius:50px;
+   width:45px;
+   height:90px;
+}
+.town-background {
+  background-image: url("app/assets/images/lighthouse-1872998_960_720.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  min-height: 15em;
+  min-width: 25em;
+}
+.center {
+  display: flex;
+  justify-content: center;
+  color: black;
+}
   
  @import url("https://fonts.googleapis.com/css?family=Ubuntu:400,700");
  :root {
