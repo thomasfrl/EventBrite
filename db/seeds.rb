@@ -19,16 +19,18 @@ Proinde die funestis interrogationibus praestituto imaginarius iudex equitum res
 
 Homines enim eruditos et sobrios ut infaustos et inutiles vitant, eo quoque accedente quod et nomenclatores adsueti haec et talia venditare, mercede accepta lucris quosdam et prandiis inserunt subditicios ignobiles et obscuros.
 "
+
+text2 = " Homines enim eruditos et sobrios ut infaustos et inutiles vitant, eo quoque accedente quod et nomenclatores adsueti haec et talia venditare, mercede accepta lucris quosdam et prandiis inserunt subditicios ignobiles et obscuros. "
 def get_random_image(image_path_prefix)
   image_files = Dir.glob("#{image_path_prefix}*")
   image_files.sample.split(image_path_prefix)[1]
 end
 
-user = User.create!(first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, email: "user9@yopmail.com", password: "motdepasse", description: "que du blabla", is_admin: true)
+user = User.create!(first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, email: "user9@yopmail.com", password: "motdepasse", description: text2, is_admin: true)
 user.avatar.attach(io: File.open("app/assets/images/users/sample/#{get_random_image("app/assets/images/users/sample/")}"), filename: get_random_image("app/assets/images/users/sample/"))
 
 9.times do |i|
-   user = User.create!(first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, email: "user#{i}@yopmail.com", password: "motdepasse", description: "que du blabla")
+   user = User.create!(first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, email: "user#{i}@yopmail.com", password: "motdepasse", description: text2)
   user.avatar.attach(io: File.open("app/assets/images/users/sample/#{get_random_image('app/assets/images/users/sample/')}"), filename: get_random_image("app/assets/images/users/sample/"))
   end
 puts "Users created"

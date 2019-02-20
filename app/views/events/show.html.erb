@@ -1,66 +1,26 @@
-<div class="container my-5">
-    <header class="d-flex">
-        <%if @event.event_image.attached?%>
-          <%= image_tag(@event.event_image, :alt => "event image", class: "col-8") %> 
-        <%else%>
-          <%= image_tag("events/default.jpg", :alt => "event image", class: "col-8") %> 
-        <%end%>      
-        <div class="dol-4 d-flex flex-column">
-            <p><%= "#{@event.start_date.day} #{@event.start_date.month_letter}" %></p><br>
-            <h3><%= @event.title %></h3>
-            <small class="text-muted mb-auto">Par <%= @event.administrator.name %></small>
-            <h4 class="mb-5"><%= @event.price %> €</h4>  
-        </div>
-    </header>
-    <hr class='mt-0'>
-    <aside class="d-flex my-0 py-0">
-      <i class="far fa-heart fa-3x col-8 mr-auto"></i>
-      <%= link_to "S'inscrire", new_event_attendance_path(@event), class: "btn btn-primary btn-lg btn-block col-4" %>
-    </aside>
-    <hr>
+<%= render 'shares/little_banner' %>
+<%= render 'events/event_presentation' %>
 
-    <article class="d-flex">
-      <div class="col-8">
-        <h3>A propos de l'événement</h3>
-        <p><%= raw @event.description %></p>
-      </div>
-      <div class='col-4'>
-        <h4>Date et heure</h4>
-        <p>
-          <%= "#{@event.start_date.day_week} #{@event.start_date.day} #{@event.start_date.month_letter} #{@event.start_date.year}" %>
-        </p>
-        <p>
-          <%= @event.start_date.hour_in_letter %>
-        </p>
-        <p>
-          <%= @event.duration %> min
-        </p>
-        <br>
-        <h4>Adresse</h4>
-        <p><%= @event.location %></p>
-      </div>
-    </article>
+  <hr>
+  <h2>Voici les participants : </h2>
+  <% @users.each do |user| %>
+    <%= render "events/participant", user: user %>
+  <% end %>
 
-    <hr>
-    <h2>Voici les participants : </h2>
-    <% @users.each do |user| %>
-      <%= render "events/participant", user: user %>
-    <% end %>
+  <hr>
 
-    <hr>
-
-    <div class="d-flex justify-content-around">
-      <%= link_to 'Back', events_path, class: "btn btn-outline-dark"  %>
-      <% if current_user %>
-            <% if current_user == @event.administrator %>
-          <%= link_to 'Edit', edit_event_path(@event), class: "btn btn-outline-dark" %>
-          <%= link_to 'Destroy', event_path(@event), :method => 'delete', data: { confirm: 'Are you sure?' }, class: "btn btn-outline-dark" %>
-          <%= link_to 'Liste de vos participants', event_attendances_path(@event), class: "btn btn-outline-dark" %>
-        <% elsif !current_user.events.include?(@event)%>
-          <%= link_to "S'inscrire", new_event_attendance_path(@event), class: "btn btn-outline-dark" %>
-        <% end %>   
-      <% end %>    
-    </div>
+  <div class="d-flex justify-content-around">
+    <%= link_to 'Back', events_path, class: "btn btn-outline-dark"  %>
+    <% if current_user %>
+          <% if current_user == @event.administrator %>
+        <%= link_to 'Edit', edit_event_path(@event), class: "btn btn-outline-dark" %>
+        <%= link_to 'Destroy', event_path(@event), :method => 'delete', data: { confirm: 'Are you sure?' }, class: "btn btn-outline-dark" %>
+        <%= link_to 'Liste de vos participants', event_attendances_path(@event), class: "btn btn-outline-dark" %>
+      <% elsif !current_user.events.include?(@event)%>
+        <%= link_to "S'inscrire", new_event_attendance_path(@event), class: "btn btn-outline-dark" %>
+      <% end %>   
+    <% end %>    
+  </div>
 
 </div>
 

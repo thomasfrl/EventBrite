@@ -1,0 +1,27 @@
+<div class="container pt-5 mt-5">
+    <div class="row pb-5">
+        <%if event1.event_image.attached?%>
+            <%= image_tag(event1.event_image, :alt => "event image", class: "side-picture col-6", style: 'object-fit: cover;') %> 
+        <%else%>
+            <%= image_tag("events/default.jpg", :alt => "event image", class: "side-picture col-6", style: 'object-fit: cover;') %> 
+        <%end%>      
+        <div class="col-6">
+            <h1><%= event1.title %></h1> <br>
+            <p><%= raw event1.description %></p>
+            <%= link_to 'Plus de contenu', event1, class: 'btn btn-link'  %>
+        </div>
+    </div>
+
+    <div class="row  pb-5">
+        <div class="col-6">
+            <h1><%= event2.title %></h1> <br>
+            <p><%= raw event2.description %></p>
+            <%= link_to 'Plus de contenu', event2, class: 'btn btn-link'  %>
+        </div>
+        <%if event2.event_image.attached?%>
+            <%= image_tag(event2.event_image, :alt => "event image", class: "side-picture col-6", style: 'object-fit: cover;') %> 
+        <%else%>
+            <%= image_tag("events/default.jpg", :alt => "event image", class: "side-picture col-6", style: 'object-fit: cover;') %> 
+        <%end%>      
+    </div>
+</div>
