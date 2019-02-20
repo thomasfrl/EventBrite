@@ -4,7 +4,7 @@
             <%if user.avatar.attached?%>
                 <%= image_tag user.avatar, alt: "toi", class: "user-pic "  %>
             <%else%>
-                <%= image_tag "monkey-653705_960_720.jpg", alt: "toi", class: "user-pic" %>
+                <%= image_tag "users/default.jpg", alt: "toi", class: "user-pic" %>
             <%end%> 
 
             <h5 class="mb-1"><%= user.name %></h5>
